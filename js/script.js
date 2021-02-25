@@ -1055,7 +1055,16 @@ function genPass(len, isWords, isUpper, isLower, isSymbols, isDigit) {
             }
         }
 
-        if (isSymbols) {
+        if (isSymbols && !isWords && !isLower && !isUpper) {
+            pass = '';
+            while (pass.length < len) {
+                pass += symbols[randomInteger(0, symbols.length-1)];
+            }
+
+            if (pass.length > len) {
+                pass = pass.substr(0, len);
+            }
+        } else if (isSymbols) {
             for (let j=0; j<cntReplace; j++) {
                 let replaceIdx = null;
                 while(true) {
@@ -1069,7 +1078,16 @@ function genPass(len, isWords, isUpper, isLower, isSymbols, isDigit) {
             }
         }
 
-        if (isDigit) {
+        if (isDigit && !isWords && !isLower && !isUpper && !isSymbols) {
+            pass = '';
+            while (pass.length < len) {
+                pass += randomInteger(0, 9);
+            }
+
+            if (pass.length > len) {
+                pass = pass.substr(0, len);
+            }
+        } else if (isDigit) {
             for (let j=0; j<cntReplace; j++) {
                 let replaceIdx = null;
                 while(true) {
