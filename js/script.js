@@ -1009,6 +1009,14 @@ String.prototype.replaceAt = function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
 
+function copytext(el) {
+    var $tmp = $("<textarea>");
+    $("body").append($tmp);
+    $tmp.val($(el).text()).select();
+    document.execCommand("copy");
+    $tmp.remove();
+}
+
 function genPass(len, isWords, isUpper, isLower, isSymbols, isDigit) {
     if (!isWords && !isUpper && !isLower && !isSymbols && !isDigit) {
         return ['', '' , '', '', '', '']
